@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080b14">
+<title>AP SYSTEM</title>
+<link rel="manifest" href="manifest.json">
+<style>
+:root{color-scheme:dark;--bg:#070a12;--panel:#101726;--panel2:#151f31;--line:#26344c;--blue:#62d7ff;--blue2:#338dff;--muted:#8ea2bd;--white:#eef6ff;--green:#68f0b0;--gold:#ffcf70;--red:#ff7187}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#132849 0,#080d18 36%,var(--bg) 75%);color:var(--white);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
+button,input,select{font:inherit}button{cursor:pointer;border:0}.app{max-width:720px;margin:auto;padding:env(safe-area-inset-top) 16px calc(92px + env(safe-area-inset-bottom))}
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 0 12px}.brand{letter-spacing:.18em;font-weight:900;font-size:13px;color:var(--blue)}.brand span{color:#fff}.chip{font-size:11px;letter-spacing:.12em;border:1px solid var(--line);padding:6px 9px;border-radius:999px;color:var(--muted)}
+h1{font-size:29px;line-height:1.1;margin:5px 0 7px;letter-spacing:-.04em}h2{font-size:17px;margin:0 0 12px}p{margin:0;color:var(--muted)}.eyebrow{font-size:10px;letter-spacing:.2em;color:var(--blue);font-weight:800;text-transform:uppercase}
+.panel{background:linear-gradient(145deg,rgba(20,32,52,.96),rgba(11,17,29,.98));border:1px solid var(--line);border-radius:18px;padding:16px;margin:13px 0;box-shadow:0 10px 30px #0003}
+.hero{position:relative;overflow:hidden;border-color:#28527a;background:linear-gradient(135deg,#102a49,#111729 58%,#21183d)}.hero:after{content:"";position:absolute;width:170px;height:170px;right:-45px;top:-45px;border-radius:50%;border:1px solid #62d7ff35;box-shadow:0 0 0 22px #62d7ff08,0 0 0 45px #62d7ff06}.hero>*{position:relative;z-index:1}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px}.rank{font-size:12px;color:var(--blue);border:1px solid #397ca4;padding:6px 10px;border-radius:8px;font-weight:800;letter-spacing:.1em}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:17px}.stat{background:#050b15a8;border:1px solid #ffffff12;border-radius:12px;padding:10px}.stat strong{display:block;font-size:22px}.stat small{color:var(--muted);font-size:10px;letter-spacing:.1em}
+.progress{height:8px;background:#26354a;border-radius:99px;overflow:hidden;margin:9px 0 5px}.progress div{height:100%;background:linear-gradient(90deg,var(--blue2),var(--blue));border-radius:99px;transition:width .25s}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:20px 2px 8px}.section-head h2{margin:0}.sub{font-size:12px;color:var(--muted)}
+.quest{display:grid;grid-template-columns:28px 1fr auto;gap:11px;align-items:center;padding:13px 0;border-bottom:1px solid #ffffff0d}.quest:last-child{border-bottom:0}.check{width:25px;height:25px;border-radius:8px;border:1px solid #3e5877;background:#0b1321;color:var(--blue);display:grid;place-items:center;font-weight:900}.check.done{background:#174e4c;border-color:#4ed9a7;color:var(--green)}.quest-name{font-weight:750}.quest-detail{font-size:12px;color:var(--muted);margin-top:2px}.xp{font-size:11px;color:var(--gold);white-space:nowrap}
+.btn{border-radius:11px;padding:11px 14px;font-weight:800;background:linear-gradient(100deg,#2d8bff,#62d7ff);color:#06101c}.btn.secondary{background:#19263a;border:1px solid var(--line);color:var(--white)}.btn:disabled{opacity:.45;cursor:not-allowed}.btn.full{width:100%}.two{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.nav{position:fixed;bottom:0;left:0;right:0;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:#070a12ed;backdrop-filter:blur(18px);border-top:1px solid #ffffff13;display:flex;justify-content:center;gap:6px;z-index:5}.nav button{flex:1;max-width:170px;padding:9px 5px;background:transparent;color:var(--muted);border-radius:10px;font-size:11px}.nav button.active{background:#142941;color:var(--blue)}
+.view{display:none}.view.active{display:block}.field{display:block;width:100%;background:#080e19;color:var(--white);border:1px solid var(--line);border-radius:10px;padding:12px;margin:6px 0 12px}.notice{font-size:12px;border-left:3px solid var(--gold);padding:9px 11px;background:#ffcf7010;color:#c6d1df;border-radius:0 8px 8px 0}.success{color:var(--green)}.history-item{padding:12px 0;border-bottom:1px solid #ffffff12}.history-item:last-child{border:0}.badge{font-size:10px;border:1px solid var(--line);padding:4px 7px;border-radius:6px;color:var(--blue)}.empty{text-align:center;padding:22px 10px;color:var(--muted)}.tiny{font-size:11px;color:var(--muted)}.login{max-width:420px;margin:10vh auto;padding:22px}.hidden{display:none!important}
+@media(min-width:600px){.app{padding-left:24px;padding-right:24px}.stats strong{font-size:26px}}
+</style>
+</head>
+<body>
+<div id="loginScreen" class="panel login hidden">
+  <div class="brand">AP <span>SYSTEM</span></div><p class="eyebrow" style="margin-top:24px">Hunter authentication</p><h1 style="margin-top:8px">Enter the System.</h1>
+  <p style="margin-bottom:18px">Prototype access. This local demo does not create a real online account.</p>
+  <label class="tiny" for="email">Email</label><input id="email" class="field" type="email" placeholder="you@example.com" autocomplete="email">
+  <label class="tiny" for="password">Password (demo only)</label><input id="password" class="field" type="password" placeholder="At least 6 characters" autocomplete="current-password">
+  <button id="loginBtn" class="btn full">Enter demo</button><p id="loginError" class="tiny" style="color:var(--red);margin-top:9px"></p>
+  <p class="tiny" style="margin-top:14px">Demo mode stores your chosen email on this device. Do not use a real password here.</p>
+</div>
+<div id="appScreen" class="app">
+<header><div class="brand">AP <span>SYSTEM</span></div><div id="dateChip" class="chip">DAILY QUEST</div></header>
+<div class="view active" id="homeView">
+  <section class="panel hero">
+    <div class="row"><div><div class="eyebrow">Hunter profile</div><h1 id="hunterName">AP</h1><p id="rankLine">E-RANK HUNTER · COMEBACK ARC</p></div><div class="rank" id="rankBadge">E-RANK</div></div>
+    <div style="margin-top:19px" class="row"><span class="tiny">LEVEL <b id="level">1</b></span><span class="tiny"><b id="xpLabel">0 / 100 XP</b></span></div><div class="progress"><div id="xpBar" style="width:0%"></div></div>
+    <div class="stats"><div class="stat"><strong id="streak">0</strong><small>DAY STREAK</small></div><div class="stat"><strong id="sessions">0</strong><small>SESSIONS</small></div><div class="stat"><strong id="totalXp">0</strong><small>TOTAL XP</small></div></div>
+  </section>
+  <div class="section-head"><h2>Today's quest</h2><span class="badge" id="todayType">STRENGTH</span></div>
+  <section class="panel"><div class="row"><div><div class="eyebrow" id="dayLabel">DAY 1 · UPPER BODY</div><h2 id="workoutTitle" style="font-size:21px;margin:5px 0">Awakening</h2><p id="workoutNote">Controlled reps. Leave something in the tank.</p></div><div style="font-size:29px">⚔️</div></div>
+  <div id="questList"></div><div class="progress"><div id="questProgress" style="width:0%"></div></div><div class="row"><span id="questCount" class="tiny">0 / 4 complete</span><span id="questXp" class="xp">+0 XP earned</span></div>
+  <button id="finishBtn" class="btn full" style="margin-top:14px" disabled>Complete daily quest</button><p id="finishMsg" class="tiny" style="margin-top:9px"></p></section>
+  <div class="section-head"><h2>System notice</h2><span class="badge">RULES</span></div>
+  <section class="panel"><p id="systemNotice">Complete today's quests. Training difficulty only increases after a consistent week and a performance check.</p></section>
+</div>
+<div class="view" id="historyView">
+  <div class="section-head"><h2>Quest history</h2><span class="badge">SAVED LOCALLY</span></div>
+  <section class="panel"><div class="row"><div><div class="eyebrow">Training record</div><h1 style="font-size:24px">Your progress</h1></div><button id="exportBtn" class="btn secondary">Export</button></div><div class="stats"><div class="stat"><strong id="histSessions">0</strong><small>SESSIONS</small></div><div class="stat"><strong id="histExercises">0</strong><small>EXERCISES</small></div><div class="stat"><strong id="histBest">0</strong><small>BEST STREAK</small></div></div><div id="historyList" style="margin-top:12px"></div></section>
+</div>
+<div class="view" id="statsView">
+  <div class="section-head"><h2>Hunter attributes</h2><span class="badge">PLAYER DATA</span></div>
+  <section class="panel"><div class="row"><div><div class="eyebrow">Strength</div><h2>STR</h2></div><strong id="strStat">1</strong></div><div class="progress"><div id="strBar" style="width:10%"></div></div><p class="tiny">Increases with completed resistance-training sessions.</p><hr style="border:0;border-top:1px solid var(--line);margin:18px 0"><div class="row"><div><div class="eyebrow">Endurance</div><h2>END</h2></div><strong id="endStat">1</strong></div><div class="progress"><div id="endBar" style="width:10%"></div></div><p class="tiny">Increases with completed cardio or leg-focused sessions.</p><hr style="border:0;border-top:1px solid var(--line);margin:18px 0"><div class="row"><div><div class="eyebrow">Consistency</div><h2>CON</h2></div><strong id="conStat">1</strong></div><div class="progress"><div id="conBar" style="width:10%"></div></div><p class="tiny">Earned by showing up regularly, not by doing something heroic once.</p></section>
+  <section class="panel"><h2>Account & data</h2><p id="accountLabel">Local demo profile</p><p class="tiny" style="margin:9px 0 13px">This prototype saves data in this browser on this device. Clearing website data may erase it. Cross-device sync needs real authentication and a cloud database.</p><div class="two"><button id="logoutBtn" class="btn secondary">Switch profile</button><button id="resetBtn" class="btn secondary">Reset progress</button></div><p id="accountMsg" class="tiny" style="margin-top:10px"></p></section>
+</div>
+</div>
+<nav class="nav"><button class="active" data-view="homeView">⚔️<br>QUEST</button><button data-view="historyView">▤<br>HISTORY</button><button data-view="statsView">◈<br>STATUS</button></nav>
+<script>
+const $=id=>document.getElementById(id);
+const STORE='ap-system-v1';
+const DAY=86400000;
+const workouts=[
+ {title:'Upper Body Awakening',type:'STRENGTH',label:'UPPER BODY',note:'Smooth reps. Stop if form breaks.',items:[['Push-ups','2 sets × 6–10 reps'],['Dumbbell curls','2 sets × 10–12 reps'],['Dumbbell shoulder press','2 sets × 8–10 reps'],['One-arm dumbbell row','2 sets × 10 each side']]},
+ {title:'Legs & Core',type:'STRENGTH',label:'LOWER BODY',note:'Controlled movement. No max-effort tests.',items:[['Bodyweight squats','2 sets × 10–12 reps'],['Dumbbell Romanian deadlift','2 sets × 10 reps'],['Calf raises','2 sets × 12–15 reps'],['Dead bug','2 sets × 8 each side']]},
+ {title:'Cardio & Conditioning',type:'ENDURANCE',label:'CONDITIONING',note:'Easy pace. You should still be able to speak.',items:[['Brisk walk or easy jog','15–20 minutes'],['Shadow boxing','3 rounds × 1 minute'],['Plank','2 sets × 20–30 seconds'],['Gentle cooldown walk','5 minutes']]},
+ {title:'Full Body Hunter Trial',type:'MIXED',label:'FULL BODY',note:'Keep at least one rep in reserve.',items:[['Goblet squat','2 sets × 10 reps'],['Dumbbell floor press','2 sets × 8–12 reps'],['Dumbbell row','2 sets × 10 each side'],['March in place','3 rounds × 45 seconds']]}
+];
+let state, userKey='';
+function today(){return new Date().toISOString().slice(0,10)}
+function blank(email){return {email,created:today(),xp:0,level:1,streak:0,bestStreak:0,lastSession:null,sessions:0,history:[],completed:{},progression:0,stats:{str:1,end:1,con:1}}}
+function load(){try{return JSON.parse(localStorage.getItem(STORE+'-'+userKey))||blank(userKey)}catch{return blank(userKey)}}
+function save(){localStorage.setItem(STORE+'-'+userKey,JSON.stringify(state))}
+function dayIndex(){const start=new Date(state.created+'T12:00:00').getTime();return Math.max(0,Math.floor((new Date(today()+'T12:00:00').getTime()-start)/DAY))}
+function workoutIndex(){return dayIndex()%4}
+function workout(){let w=JSON.parse(JSON.stringify(workouts[workoutIndex()]));let p=state.progression;if(p>0){w.items=w.items.map(([n,d])=>[n,d.replace(/2 sets/g,(p>=2?'3 sets':'2 sets')).replace(/6–10 reps/,p>=3?'8–12 reps':'6–10 reps').replace(/10–12 reps/,p>=3?'12–14 reps':'10–12 reps')]);}return w}
+function currentDone(){return state.completed[today()]||[]}
+function xpIntoLevel(){return state.xp%100}
+function rank(){return state.level>=25?'S-RANK':state.level>=15?'A-RANK':state.level>=10?'B-RANK':state.level>=6?'C-RANK':state.level>=3?'D-RANK':'E-RANK'}
+function render(){
+ const w=workout(),done=currentDone(),earned=done.length*25;
+ $('dateChip').textContent=new Date().toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'}).toUpperCase();
+ $('hunterName').textContent=(state.email.split('@')[0]||'AP').slice(0,18).toUpperCase();
+ $('rankBadge').textContent=rank();$('rankLine').textContent=rank()+' HUNTER · COMEBACK ARC';
+ $('level').textContent=state.level;$('xpLabel').textContent=xpIntoLevel()+' / 100 XP';$('xpBar').style.width=xpIntoLevel()+'%';
+ $('streak').textContent=state.streak;$('sessions').textContent=state.sessions;$('totalXp').textContent=state.xp;
+ $('todayType').textContent=w.type;$('dayLabel').textContent='DAY '+(dayIndex()+1)+' · '+w.label;$('workoutTitle').textContent=w.title;$('workoutNote').textContent=w.note;
+ $('questList').innerHTML=w.items.map((it,i)=>`<div class="quest"><button class="check ${done.includes(i)?'done':''}" data-quest="${i}" aria-label="Toggle ${it[0]}">${done.includes(i)?'✓':''}</button><div><div class="quest-name">${it[0]}</div><div class="quest-detail">${it[1]}</div></div><span class="xp">+25 XP</span></div>`).join('');
+ $('questCount').textContent=done.length+' / '+w.items.length+' complete';$('questXp').textContent='+'+earned+' XP earned';$('questProgress').style.width=(done.length/w.items.length*100)+'%';
+ const already=state.history.some(h=>h.date===today());
+ $('finishBtn').disabled=done.length!==w.items.length||already;$('finishBtn').textContent=already?'Daily quest completed':'Complete daily quest';
+ $('finishMsg').textContent=already?'Quest logged. Recovery is part of the system.':done.length===w.items.length?'All tasks cleared. Claim your completion XP.':'Complete every task to clear the daily quest.';
+ $('systemNotice').textContent=state.progression===0?'Level-up rule: complete at least 3 sessions in 7 days before considering a progression increase.':`Progression tier ${state.progression}. The system checks consistency before increasing workload.`;
+ $('histSessions').textContent=state.sessions;$('histExercises').textContent=state.history.reduce((s,h)=>s+h.exerciseCount,0);$('histBest').textContent=state.bestStreak;
+ $('historyList').innerHTML=state.history.length?state.history.slice().reverse().map(h=>`<div class="history-item"><div class="row"><strong>${h.title}</strong><span class="badge">+${h.xp} XP</span></div><p class="tiny">${h.date} · ${h.exerciseCount} tasks completed · Level ${h.level}</p></div>`).join(''):'<div class="empty">No completed quests yet. Your legend is currently in the loading screen.</div>';
+ $('strStat').textContent=state.stats.str;$('endStat').textContent=state.stats.end;$('conStat').textContent=state.stats.con;
+ $('strBar').style.width=Math.min(100,state.stats.str*10)+'%';$('endBar').style.width=Math.min(100,state.stats.end*10)+'%';$('conBar').style.width=Math.min(100,state.stats.con*10)+'%';
+ $('accountLabel').textContent='Signed in (local demo): '+state.email;
+ document.querySelectorAll('[data-quest]').forEach(b=>b.addEventListener('click',()=>toggle(+b.dataset.quest)));
+}
+function toggle(i){let d=currentDone();d=d.includes(i)?d.filter(x=>x!==i):[...d,i];state.completed[today()]=d;save();render()}
+function complete(){
+ if(state.history.some(h=>h.date===today()))return;
+ let w=workout(),done=currentDone();if(done.length!==w.items.length)return;
+ let prev=state.lastSession?Math.round((new Date(today()+'T12:00:00')-new Date(state.lastSession+'T12:00:00'))/DAY):null;
+ state.streak=prev===1?state.streak+1:1;state.bestStreak=Math.max(state.bestStreak,state.streak);
+ state.xp+=100;state.sessions++;state.lastSession=today();state.stats.con++;
+ if(w.type==='STRENGTH'||w.type==='MIXED')state.stats.str++;
+ if(w.type==='ENDURANCE'||w.label==='LOWER BODY')state.stats.end++;
+ const oldLevel=state.level;state.level=Math.floor(state.xp/100)+1;
+ state.history.push({date:today(),title:w.title,xp:100,exerciseCount:done.length,level:state.level});
+ // Review progression after 7 calendar days: at least 3 completed sessions in the last week.
+ const cutoff=new Date(Date.now()-7*DAY).toISOString().slice(0,10);
+ const recent=state.history.filter(h=>h.date>=cutoff).length;
+ if(recent>=3 && dayIndex()>=6 && state.progression<3){state.progression++;state.history[state.history.length-1].level=state.level;}
+ save();render();
+ $('finishMsg').textContent=state.level>oldLevel?'LEVEL UP! Level '+state.level+' unlocked.':state.progression>0?'Quest cleared. Your progression tier is '+state.progression+'.':'Quest cleared! Keep training consistently for your first progression review.';
+}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id===b.dataset.view));}));
+$('finishBtn').addEventListener('click',complete);
+$('exportBtn').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ap-system-progress.json';a.click();URL.revokeObjectURL(a.href)});
+$('loginBtn').addEventListener('click',()=>{const email=$('email').value.trim().toLowerCase(),pass=$('password').value;if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||pass.length<6){$('loginError').textContent='Enter a valid email and at least 6 characters for the demo password.';return}userKey=email;localStorage.setItem('ap-system-active',userKey);state=load();$('loginScreen').classList.add('hidden');$('appScreen').classList.remove('hidden');save();render()});
+$('logoutBtn').addEventListener('click',()=>{localStorage.removeItem('ap-system-active');userKey='';state=null;$('appScreen').classList.add('hidden');$('loginScreen').classList.remove('hidden');$('email').value='';$('password').value='';});
+$('resetBtn').addEventListener('click',()=>{if(confirm('Reset all progress for this local demo profile? This cannot be undone.')){state=blank(userKey);save();render();$('accountMsg').textContent='Progress reset.'}});
+userKey=localStorage.getItem('ap-system-active')||'';
+if(userKey){state=load();$('appScreen').classList.remove('hidden');$('loginScreen').classList.add('hidden');render()}else{$('appScreen').classList.add('hidden');$('loginScreen').classList.remove('hidden')}
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script>
+</body>
+</html>
